@@ -1,0 +1,37 @@
+# medington's Bash readline customizations
+
+# Options
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set horizontal-scroll-mode off
+
+# Up and down arrow search previous command history
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+"\C-o": history-search-backward
+
+# Ctrl-Right Arrow and Ctrl-Left Arrow for word movement
+# These don't work for remote shells (use alt+arrow instead)
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+
+"\e[5C": forward-word
+"\e[5D": backward-word
+
+# Map Home and End to beginning and end of line
+# Must also configure Terminal prefs to pass along Home=\033[1~ End=\033[4~
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+
+# Ctrl-K or Escape twice clears the current line
+#"\C-k": kill-whole-line
+"\e\e": kill-whole-line
+
+#VIM Bindings
+#set editing-mode vi
+$if mode=vi
+  set keymap vi-command
+  "G": end-of-history
+  set keymap vi-insert
+  "jk": vi-movement-mode
+$endif
